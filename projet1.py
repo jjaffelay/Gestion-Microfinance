@@ -4,7 +4,7 @@ cur=connection.cursor()
 from math import*
 import time
 print('Bienvenue sur la Microfinance des Etudiants ! quelle opération voulez-vous faire ? ')
-option=int(input('fêtes votre choix en tapant 1 pour ceer un nouveau compte, 2 pour faire un depot ou un retrait,8 Pour consulter votre historique.\n'))
+option=int(input('fêtes votre choix en tapant 1 pour créer un nouveau compte, 2 pour faire un dépôt ou un retrait,8 Pour consulter votre historique.\n'))
 #Ouverture d'un nouveau compte pour un étudiant 
 if(option<1):
       print('Erreur ! Entrez 1 ou 2\n')
@@ -25,7 +25,7 @@ elif(option==1):
             if(montD<=0):
                 print('Erreur ! Veuillez entrer un montant superieur à 0\n')
             elif(montD<499):
-                montD=int(input('le montant demandé ne peut pas être traité. Veuillez entrer un autre montant.\n'))
+                montD=int(input('le montant demandé ne peut pas être traité. Veuillez entrer un montant supérieur ou égal à 500,merci!.\n'))
             elif(montD>=499):
                 dat=time.strftime("%d/%m/%Y %H:%M")
                 cur.execute("INSERT INTO operation(type,matricule_etudiant,montant,date) VALUES(?,?,?,?);",("depot", mat, montD, dat))
@@ -59,7 +59,7 @@ elif(option==1):
                 print('Vous avez retiré de votre compte, une somme de:')
                 print(montR,"FrCFA")
                 print('Votre nouveau solde est de:')
-                print(sold[0],"FrCFA")
+                print(sold[0],"FRCFA")
                 print('La Microfinance des Etudiants vous remercie !')
       else:
             print('Au revoir')
@@ -126,7 +126,7 @@ elif(option==8):
             print('Prenom: '+res[2])
             #print("\n")
             print('Telephone: '+res[4])
-            print("\n Solde actuel: ",res[6])
+            print("\n Solde actuel: ",res[6],"FRCFA")
             cur.execute("SELECT * FROM operation WHERE matricule_etudiant=?;", [mat])
             ops=cur.fetchall()
             if(ops==None):
@@ -136,8 +136,3 @@ elif(option==8):
                   for row in ops:
                         print(row[0],'\t ',row[1],' \t ',row[3],' \t '+row[4])
 #connection.close() mat:123456/456123
-                     
-
-        
-                         
-               
